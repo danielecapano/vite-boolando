@@ -2,6 +2,11 @@
 export default {
     data(){
         return {
+            items: ['Donna', 'Uomo', 'Bambino'],
+            icons: ["src/assets/icons/user.svg",
+                    "src/assets/icons/heart.svg",
+                    "src/assets/icons/bag-shopping.svg"
+                ]
 
         }
     }
@@ -14,11 +19,9 @@ export default {
         <nav class="navbar">
           <div class="row space-between">
             <div class="menu">
-              <ol class="menu__list">
-                <li class="li__item"><a href="#">Donna</a></li>
-                <li class="li__item"><a href="#">Uomo</a></li>
-                <li class="li__item"><a href="#">Bambini</a></li>
-              </ol>
+              <ul class="menu__list">
+                <li  v-for="item in items" class="li__item"><a href="#">{{item}}</a></li>
+              </ul>
             </div>
 
             <div class="logo">
@@ -27,15 +30,10 @@ export default {
 
             
               <ul class="icons__list">
-                <li class="icons__item">
-                  <a href=""><img src="../assets/icons/user.svg" alt="user"></a>
+                <li class="icons__item" v-for="icon in icons">
+                  <a href=""><img :src="icon" alt="user"></a>
                 </li>
-                <li class="icons__item">
-                  <a href="#"><img src="../assets/icons/heart.svg" alt=""></a>
-                </li>
-                <li class="icons__item">
-                  <a href="#"><img src="../assets/icons/bag-shopping.svg" alt=""></a>
-                </li>
+            
               </ul>
             
           </div>
