@@ -14,6 +14,10 @@ export default {
     methods: {
         getImagePath: function(imgPath) {
             return new URL(imgPath, import.meta.url).href;
+        },
+        getPriceDiscounted(price, discount) {
+            discount = 100 - parseInt(discount.substring(1,3));
+            return (price * discount / 100).toFixed(2);
         }
     },
 }
@@ -26,8 +30,9 @@ export default {
                 <img class="card__image--hover" :src="getImagePath(`../assets/images/${item.backImage}`)" alt="Image" />
 
                 <div class="banner">
-                    <span class="discount">-50%</span>
-                    <span class="discount green">Sostenibilità</span>
+                    <!-- <span class="discount">-50%</span>
+                    <span class="tag">Sostenibilità</span> -->
+                    <span v-for="badge in item.badges" :class="badge.type"> {{ badge.value }}</span>
                   </div>
                   <span class="heart" :class="item.isInFavorites ? 'favorites' : ''">&#9829;</span>
               </figure>
@@ -35,7 +40,12 @@ export default {
               <div class="card__content">
                 <p class="brand">{{ item.brand }}</p>
                 <p class="description">{{ item.name }}</p>
-                <p class="price">14,99 &euro; <span>{{ item.price }} &euro;</span></p>
+                <div class="prices" v-for="badge in item.badges">
+                    <span class="discounted-price" v-if="badge.type === 'discount'" >{{ getPriceDiscounted(item.price, badge.value) }} &euro;&nbsp;</span>
+                    
+                </div>
+                <span class="full-price">{{ item.price }} &euro;</span>
+                
               </div>
               
             </div>
@@ -76,9 +86,17 @@ export default {
             font-weight: 700;
             line-height: 20px;
             padding: 0 0.375rem;
-                &.green {
-                background-color: #008000;
-                }
+            }
+
+            .tag {
+            display: inline-block;
+            background-color: #008000;
+            color: #FFF;
+            font-size: 0.625rem;
+            font-weight: 700;
+            line-height: 20px;
+            padding: 0 0.375rem;
+            order: 1;
             }
             
         }
@@ -113,19 +131,24 @@ export default {
             text-transform: uppercase;
         }
 
-        .price {
+        .prices {
+            display: inline-block;
+        }
+        .discounted-price {
             font-weight: 700;
             color: #ff0000;
             font-size: 0.75rem;
-
-            span {
-                font-weight: 400;
-                color: #000;
-                text-decoration: line-through;
-            }
         }
-
-    }
+        .full-price {
+            font-weight: 400;
+            font-size: 0.75rem;
+            color: #000;
+            text-decoration: line-through;
+        }
+        .hide {
+            display: none;
+        }
+}
 }
 
 </style>
