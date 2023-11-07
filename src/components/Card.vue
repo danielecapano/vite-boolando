@@ -4,27 +4,38 @@ export default {
         return {
 
         }
-    }
+    },
+    props: {
+        item: {
+            type: Object,
+            required: true
+        }
+    },
+    methods: {
+        getImagePath: function(imgPath) {
+            return new URL(imgPath, import.meta.url).href;
+        }
+    },
 }
 </script>
 
 <template>
     <div class="card">
               <figure class="card__image">
-                <img src="../assets/images/1.webp" alt="Relaxed fit tee unisex" />
-                <img class="card__image--hover" src="../assets/images/1b.webp" alt="Relaxed fit tee unisex" />
+                <img :src="getImagePath(`../assets/images/${item.frontImage}`)" alt="Image" />
+                <img class="card__image--hover" :src="getImagePath(`../assets/images/${item.backImage}`)" alt="Image" />
 
                 <div class="banner">
                     <span class="discount">-50%</span>
                     <span class="discount green">Sostenibilità</span>
                   </div>
-                  <span class="heart">&#9829;</span>
+                  <span class="heart" :class="item.isInFavorites ? 'favorites' : ''">&#9829;</span>
               </figure>
               
               <div class="card__content">
-                <p class="brand">Levi's</p>
-                <p class="description">Relaxed fit tee unisex</p>
-                <p class="price">14,99 &euro; <span>29.99 &euro;</span></p>
+                <p class="brand">{{ item.brand }}</p>
+                <p class="description">{{ item.name }}</p>
+                <p class="price">14,99 &euro; <span>{{ item.price }} &euro;</span></p>
               </div>
               
             </div>
@@ -84,7 +95,8 @@ export default {
         cursor: pointer;
         transition: color 0.2s ease-in-out;
 
-            &:hover {
+            &:hover,
+            &.favorites {
                 color: #ff0000;
             }
         }

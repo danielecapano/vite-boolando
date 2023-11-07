@@ -1,11 +1,13 @@
 <script>
 import Card from './Card.vue';
+import Products from '../db.json'
 export default {
     components: {
         Card
     },
     data() {
         return {
+            cards: Products.products,
 
         }
     }
@@ -16,8 +18,8 @@ export default {
     <main>
         <div class="container">
             <div class="grid" >
-                <div class="product" v-for="n in 6" :key="n">
-                    <Card />
+                <div class="product" v-for="(card, i) in cards" :key="card.id">
+                    <Card :item = card  />
                 </div>
             </div>
         </div>
