@@ -8,12 +8,14 @@ export default {
   components: {
     Header,
     Main,
-    Card,
   },
   data(){
     return {
 
     }
+  },
+  created() {
+    
   }
 }
 </script>
