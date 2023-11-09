@@ -8,10 +8,12 @@ export default {
     },
     data() {
         return {
-            cards: store.products,
+            store: store,
  
         }
-    }
+    },
+    
+
 }
 </script>
 
@@ -19,8 +21,8 @@ export default {
     <main>
         <div class="container">
             <div class="grid" >
-                <div class="product" v-for="(card, i) in cards" :key="card.id">
-                    <Card :item = card  n />
+                <div class="product" v-for="(card, i) in store.products" :key="card.id">
+                    <Card :item = card />
                 </div>
             </div>
         </div>

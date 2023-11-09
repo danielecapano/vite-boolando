@@ -1,6 +1,6 @@
 import { reactive } from "vue";
-import cards from "./db.json";
+// import cards from "./db.json";
 
 export const store = reactive({
-  products: cards.products,
+  products: [],
 });
