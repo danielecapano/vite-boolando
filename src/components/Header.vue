@@ -3,9 +3,9 @@ export default {
     data(){
         return {
             items: ['Donna', 'Uomo', 'Bambino'],
-            icons: ["src/assets/icons/user.svg",
-                    "src/assets/icons/heart.svg",
-                    "src/assets/icons/bag-shopping.svg"
+            icons: ["fa-solid fa-user",
+                    "fa-regular fa-heart",
+                    "fa-solid fa-bag-shopping"
                 ]
 
         }
@@ -30,8 +30,8 @@ export default {
 
             
               <ul class="icons__list">
-                <li class="icons__item" v-for="icon in icons">
-                  <a href=""><img :src="icon" alt="user"></a>
+                <li class="icons__item" v-for="icon in icons" >
+                    <font-awesome-icon :icon="icon" />
                 </li>
             
               </ul>

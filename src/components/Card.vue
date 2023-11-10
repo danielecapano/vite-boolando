@@ -45,6 +45,7 @@ export default {
                     
                 </div>
                 <span class="full-price">{{ item.price }} &euro;</span>
+                <span  @click="$emit('show', item)" class="info"><font-awesome-icon icon="fa-solid fa-circle-info" /></span>
                 
               </div>
               
@@ -121,6 +122,7 @@ export default {
     }
 
     .card__content {
+        position: relative;
         .brand {
         font-size: 0.75rem;
 }
@@ -129,6 +131,7 @@ export default {
             font-weight: 600;
             font-size: 0.875rem;
             text-transform: uppercase;
+            
         }
 
         .prices {
@@ -147,6 +150,14 @@ export default {
         }
         .hide {
             display: none;
+        }
+        .info {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 30px;
+        cursor: pointer;
         }
 }
 }
